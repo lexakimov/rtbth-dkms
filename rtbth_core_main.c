@@ -26,16 +26,22 @@
 
 #include <linux/init.h>
 #include <linux/module.h>
+#include <linux/version.h>
 #include "include/rtbth_dbg.h"
 #include "rtbt_osabl.h"
 #include "rtbth_3298.h"
 #include "rtbt_ctrl.h"
 
-#define VERSION	"3.9.6"
+#define VERSION	"3.10.0"
 
 MODULE_AUTHOR("Ralink Tech.");
 MODULE_DESCRIPTION("Support for Ralink Bluetooth RT3290 Cards");
+
+// https://www.phoronix.com/scan.php?page=news_item&px=Linux-5.12-rc4
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5,12,0)
 MODULE_SUPPORTED_DEVICE("Ralink Bluetooth RT3290 cards");
+#endif
+
 MODULE_LICENSE("GPL");
 MODULE_VERSION(VERSION);
 
