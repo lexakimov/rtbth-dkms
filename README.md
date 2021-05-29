@@ -3,27 +3,34 @@ It enables [Bluez](http://www.bluez.org) software and driver support for RT3290.
 
 This module has no official support by Mediatek. Support was discontinued.
 
+This version also supports linux 5.12.
 
-### Usage: ###
+## Installation: ##
+*Adapted for Arch and derivatives (e.g. Manjaro).*
 
+Before build, install corresponding version of `linux-headers` package for you kernel.
 ```sh
-# Init
-sudo modprobe rtbth
-sudo rfkill unblock bluetooth
-hcitool dev # check
-
-# Switch off
-sudo rfkill block bluetooth
-
-# Switch on
-sudo rfkill unblock bluetooth
-
-# Shutdown
-sudo pkill -2 rtbt
-sudo rmmod rtbth
+# example (kernel version 5.12)
+sudo pacman -S linux512-headers
 ```
 
+#### Build and install kernel module ####
 
-### Installation: ###
+```sh
+# clean previously compiled files
+make clean
 
-[Ubuntu and derivatives](https://launchpad.net/~blaze/+archive/ubuntu/rtbth-dkms)
+# build module
+make
+
+# install kernel module
+sudo make install
+
+# next, add `rtbth` (without quotes) to the end of file /etc/modules-load.d/modules.conf
+
+# then, reboot PC:
+sudo reboot now
+```
+
+#### Further setup ####
+A further setup described [here](https://wiki.archlinux.org/title/Bluetooth).
